@@ -1,0 +1,58 @@
+version: '3'
+networks:
+  nodetest:
+
+services:
+  lb:
+    image: mminks/haproxy-docker-logging
+    ports:
+      - "8111:8111"
+    volumes:
+      - "./haproxy:/usr/local/etc/haproxy:ro"
+    networks:
+      nodetest:
+
+  nodeapi_1:
+    build: ./api
+    image: nodetest/api:latest
+    hostname: nodeapi_1
+    ports:
+      - "8081:8081"
+    networks:
+      nodetest:
+
+  nodeapi_2:
+    build: ./api
+    image: nodetest/api:latest
+    hostname: nodeapi_2
+    ports:
+      - "8082:8081"
+    networks:
+      nodetest:
+
+  webapp_1:
+    build: ./webapp
+    image: nodetest/web:latest
+    hostname: webapp_1
+    ports:
+      - "8083:80"
+    networks:
+      nodetest:
+
+  webapp_2:
+    build: ./webapp
+    image: nodetest/web:latest
+    hostname: webapp_2
+    ports:
+      - "8084:80"
+    networks:
+      nodetest:
+
+  webapp_qa:
+    build: ./webapp
+    image: nodetest/web:latest
+    hostname: webapp_qa
+    ports:
+      - "8085:80"
+    networks:
+      nodetest:
