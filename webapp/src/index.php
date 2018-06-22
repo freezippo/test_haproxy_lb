@@ -21,7 +21,7 @@
                 <p>The container is running PHP version <?php echo phpversion(); ?>.</p>
                 <p>Date: <?php   echo date('Y-m-d H:i:s');  ?> </p>
                 <p>Hostname: <?php echo gethostname(); ?></p>
-
+<?php sleep(4); ?>
             </div>
         </div>
 
